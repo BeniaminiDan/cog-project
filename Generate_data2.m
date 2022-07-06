@@ -23,5 +23,31 @@ for trial=1:num_of_trials
     events{:,trial}=fix;
 end
 
-%%Gr
+%% Grand events matrix (all events, not by trial)
+grand_events=[];
+for trial=1:num_of_trials
+    grand_events= [grand_events;events{:,trial}];
+end
+
+%% plot relation between saccades & fixations
+
+figure
+scatter(log(grand_events{:,6}),log(grand_events{:,10}),'o','MarkerEdgeAlpha',0.2)
+xlabel('log (Saccade length)')
+ylabel('log(Fixation duration)')
+
+figure
+scatter((grand_events{:,6}),(grand_events{:,10}),'o','MarkerEdgeAlpha',0.2)
+xlabel('Saccade length')
+ylabel('(Fixation duration)')
+
+figure
+scatter((grand_events{:,6}),log(grand_events{:,10}),'o','MarkerEdgeAlpha',0.2)
+xlabel('Saccade length')
+ylabel('log(Fixation duration)')
+
+
+ratio=[log(events(:,1))./log(events(:,2))];
+hist(ratio) %histogram of the ratio
+
 
