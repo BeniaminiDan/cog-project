@@ -1,0 +1,3 @@
+SDATA.EyeInfo.TrialFixations{trial, 1}  has titles now
+
+SDATA.EyeInfo.TrialEyeMovements{trial, 1} is [sample; xl;yl;pupl;xr;yr;pupr;blink mask] (maybe lr opposie)  

@@ -1,3 +1,4 @@
+addpath('S:\Lab-Shared\Experiments\N170 free scan\ClutteredObjects_scan')
 elfile=['OdedCN.asc'];
 [SAMPLES, triggers, FIXATIONS, SACCADES, BLINKS]=readEyelinkFast(elfile,'readEyes','lr');
 SR=1000;
@@ -37,11 +38,11 @@ events= [sacc((1:length(sacc)-1),3),fix(2:length(sacc),3)];
 
 %% plot results
 figure
-plot((events(:,1)),log(events(:,2)),'.')
+plot(log(events(:,1)),log(events(:,2)),'.')
 xlabel('Saccade length')
 ylabel('log(Fixation duration)')
 
-ratio=[events(:,1)./log(events(:,2))];
+ratio=[log(events(:,1))./log(events(:,2))];
 hist(ratio) %histogram of the ratio
 %% k-means
 
