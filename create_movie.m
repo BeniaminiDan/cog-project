@@ -1,20 +1,4 @@
-% % Z = peaks;
-% % surf(Z)
-% h = animatedline;
-% axis tight manual
-% ax = gca;
-% ax.NextPlot = 'add';
-% 
-% xfixtot = SDATA.EyeInfo.fixations(:,4);
-% yfixtot = SDATA.EyeInfo.fixations(:,5);
-% 
-% xfix = xfixtot(1:2000,:);
-% xfix = xfix{:,:};
-% 
-% yfix = yfixtot(1:2000,:);
-% yfix = yfix{:,:};
-% trajectories{:,trial}=[EyeMovements(:,1),nanmean(EyeMovements(:,[2,5]),2),nanmean(EyeMovements(:,[3,6]),2),nanmean(EyeMovements(:,[4,7]),2),EyeMovements(:,8)];
-% % trajectory is [sample; X pos; Y pos; pupil area; blink mask]
+
 
 xfixtot = SDATA.EyeInfo.fixations(:,4);
 yfixtot = SDATA.EyeInfo.fixations(:,5);
@@ -53,3 +37,27 @@ end
 
 close(v)
 
+%% updated
+
+trial_num =2; 
+subject= '101';
+
+p=trajectories{1, trial_num};
+xtraj = p(:,3);
+ytraj = p(:,2);
+
+N=length(xtraj);
+step_size = 100;
+
+v = VideoWriter('test.avi');
+open(v);
+axis([min(xtraj)-100 max(xtraj)+100 min(yfix)-100 max(yfix)+100])
+
+for j = [1:step_size:N]
+    plot(xtraj(j:j+step_size-1),yfix(j:j+step_size-1),'k');
+    hold on;
+    title(['Subject: ',subject,', ','Trial ',int2str(trial_num)])
+    frame = getframe(gcf);
+    writeVideo(v,frame)
+end
+close(v)

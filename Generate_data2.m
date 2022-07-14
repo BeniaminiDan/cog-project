@@ -3,7 +3,7 @@
 clear all
 % get the data
 cd('S:\Lab-Shared\Experiments\N170 free scan\ClutteredObjects_scan\Analysis')
-load('OdedCN_info.mat')
+load('S101_data_initial.mat')
 
 %% parameters
 num_of_trials=size(SDATA.trial_info,1);
@@ -18,7 +18,7 @@ for trial=1:num_of_trials
     
     fix=SDATA.EyeInfo.TrialFixations{trial, 1};
     %remove the lines that are triggers
-    idx=find(~fix{:,3}); % if dur is 0=trigger
+    idx=find(fix{:,10}<100); % if dur is 0=trigger
     fix([idx],:)=[]; %remove triggers
     events{:,trial}=fix;
 end
@@ -30,6 +30,8 @@ for trial=1:num_of_trials
 end
 
 %% plot relation between saccades & fixations
+
+%i think log-log is the most interesting 
 
 figure
 scatter(log(grand_events{:,6}),log(grand_events{:,10}),'o','MarkerEdgeAlpha',0.2)
@@ -47,7 +49,6 @@ xlabel('Saccade length')
 ylabel('log(Fixation duration)')
 
 
-ratio=[log(events(:,1))./log(events(:,2))];
-hist(ratio) %histogram of the ratio
-
+ratio=[(grand_events{:,6})./log(grand_events{:,10})];
+hist(ratio,200) %histogram of the ratio
 

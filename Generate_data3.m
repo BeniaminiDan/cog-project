@@ -2,8 +2,8 @@
 
 clear all
 % get the data
-% cd('S:\Lab-Shared\Experiments\N170 free scan\ClutteredObjects_scan\Analysis')
-load('OdedCN_info.mat')
+cd('S:\Lab-Shared\Experiments\N170 free scan\ClutteredObjects_scan\Analysis')
+load('S101_info.mat')
 
 % parameters
 num_of_trials=size(SDATA.trial_info,1);
