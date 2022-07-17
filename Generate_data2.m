@@ -3,7 +3,7 @@
 clear all
 % get the data
 cd('S:\Lab-Shared\Experiments\N170 free scan\ClutteredObjects_scan\Analysis')
-load('S101_data_initial.mat')
+load('OdedCN_info.mat')
 
 %% parameters
 num_of_trials=size(SDATA.trial_info,1);
@@ -49,6 +49,15 @@ xlabel('Saccade length')
 ylabel('log(Fixation duration)')
 
 
-ratio=[(grand_events{:,6})./log(grand_events{:,10})];
+ratio=[(grand_events{:,6})./(grand_events{:,10})];
 hist(ratio,200) %histogram of the ratio
 
+figure
+scatter(log(grand_events{1:200,10}),log(grand_events{1:200,6}),10,grand_events{1:200,1},'filled')
+c = colorbar;
+
+zlabel('')
+xlabel('Saccade length')
+ylabel('(Fixation duration)')
+
+plot(700:900,ratio(700:900),'-*')

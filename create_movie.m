@@ -39,8 +39,8 @@ close(v)
 
 %% updated
 
-trial_num =2; 
-subject= '101';
+trial_num =5; 
+subject= 'oded';
 
 p=trajectories{1, trial_num};
 xtraj = p(:,3);
@@ -51,10 +51,10 @@ step_size = 100;
 
 v = VideoWriter('test.avi');
 open(v);
-axis([min(xtraj)-100 max(xtraj)+100 min(yfix)-100 max(yfix)+100])
 
 for j = [1:step_size:N]
-    plot(xtraj(j:j+step_size-1),yfix(j:j+step_size-1),'k');
+    plot(xtraj(j:j+step_size-1),ytraj(j:j+step_size-1),'k');
+    axis([min(xtraj)-100 max(xtraj)+100 min(ytraj)-100 max(ytraj)+100])
     hold on;
     title(['Subject: ',subject,', ','Trial ',int2str(trial_num)])
     frame = getframe(gcf);
